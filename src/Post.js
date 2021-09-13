@@ -15,6 +15,10 @@ class Post extends Component {
                         <span className="has-text-weight-semibold"> Description : </span>
                         <h2 className="ml-2">{this.props.post.description}</h2>
                     </div>
+                    <div className="is-flex ml-5">
+                        <span className="has-text-weight-semibold"> Status : </span>
+                        <h2 className="ml-2">{this.props.post.status}</h2>
+                    </div>
                 </div>
                 <div className="column">
                     <div className="is-flex">
