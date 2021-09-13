@@ -17,11 +17,18 @@ class EditComponent extends Component {
         return (
             <div key={this.props.post.id} className="post">
                 <form className="form" onSubmit={this.handleEdit}>
-                    <input required type="text" ref={(input) => this.getTitle = input}
+                    {/* <input required type="text" ref={(input) => this.getTitle = input}
                     defaultValue={this.props.post.title} placeholder="Enter Post Title" /><br /><br />
                     <textarea required rows="5" ref={(input) => this.getMessage = input}
                     defaultValue={this.props.post.description} cols="28" placeholder="Enter Post" /><br /><br />
-                    <button>Update</button>
+                    <button>Update</button> */}
+                    <span> Title </span>
+                    <input className="input mb-2" type="text" ref={(input) => this.getTitle = input} defaultValue={this.props.post.title} placeholder="Enter Title" />
+                    <span> Description </span>
+                    <input className="input" type="text" ref={(input) => this.getMessage = input} defaultValue={this.props.post.description} placeholder="Enter Description" />
+                    <div className="mt-3 mb-5 is-flex is-justify-content-center">
+                        <button class="button is-info is-fullwidth">Update Data</button>
+                    </div>
                 </form>
             </div>
         );

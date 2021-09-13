@@ -8,9 +8,10 @@ class AllPost extends Component {
         fetch("https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list")
             .then(res => res.json())
             .then((result) => {
-                this.setState({
-                    posts: result
-                });
+                this.props.dispatch({
+                    type: 'SET_POST',
+                    data: result,
+                })
                 console.log('This is your data', result);
             },
             (error) => {
@@ -22,8 +23,8 @@ class AllPost extends Component {
     }    
     render() {
         return (
-            <div>
-                <h1 className="post_heading">All Posts</h1>
+            <div className="mt-6">
+                <span className="is-size-1">To-do List</span>
                 {this.props.posts.map((post) => (
                     <div key={post.id}>
                         {post.editing ? <EditComponent post={post} key={post.id} /> : <Post post={post} key={post.id} />}
