@@ -4,23 +4,23 @@ import Post from './Post';
 import EditComponent from './EditComponent';
 
 class AllPost extends Component {
-    componentDidMount() {
-        fetch("https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list")
-            .then(res => res.json())
-            .then((result) => {
-                this.props.dispatch({
-                    type: 'SET_POST',
-                    data: result,
-                })
-                console.log('This is your data', result);
-            },
-            (error) => {
-                this.setState({
-                    error
-                });
-            }
-        )
-    }    
+    // componentDidMount() {
+    //     fetch("https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list")
+    //         .then(res => res.json())
+    //         .then((result) => {
+    //             this.props.dispatch({
+    //                 type: 'SET_POST',
+    //                 data: result,
+    //             })
+    //             console.log('This is your data', result);
+    //         },
+    //         (error) => {
+    //             this.setState({
+    //                 error
+    //             });
+    //         }
+    //     )
+    // }    
     render() {
         return (
             <div className="mt-6">
