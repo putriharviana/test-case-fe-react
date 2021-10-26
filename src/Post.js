@@ -17,6 +17,7 @@ class Post extends Component {
                 </thead>
                 <tbody>
                     <tr key={this.props.post.id}>
+                        <td scope="row"> <img src={this.props.post.image} /> </td>
                         <td scope="row"> {this.props.post.name} </td>
                         <td scope="row"> {this.props.post.purchasePrice} </td>
                         <td scope="row"> {this.props.post.sellingPrice} </td>
