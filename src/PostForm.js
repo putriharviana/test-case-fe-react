@@ -14,6 +14,7 @@ class PostForm extends Component {
         const stock = this.getStock.value;
 
         const image = this.state.imagePreviewUrl;
+
         const data = {
             createdAt: new Date(),
             name,
@@ -33,7 +34,6 @@ class PostForm extends Component {
         this.getPurchasePrice.value = '';
         this.getSellingPrice.value = '';
         this.getStock.value = '';
-
     }
     _handleImageChange(e) {
         e.preventDefault();
@@ -76,7 +76,6 @@ class PostForm extends Component {
                         <input className="fileInput" 
                             type="file" 
                             onChange={(e)=>this._handleImageChange(e)} 
-                            ref={(input) => this.state.imagePreviewUrl = input}
                         />
                         <div className="imgPreview">
                             {$imagePreview}

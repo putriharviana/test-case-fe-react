@@ -3,13 +3,21 @@ import { connect } from 'react-redux';
 
 
 class EditComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {file: '', imagePreviewUrl: this.props.post.image};
+    }
     handleEdit = (e) => {
         e.preventDefault();
+        
+        const newImage = this.state.imagePreviewUrl;
+        
         const newName = this.getName.value;
         const newPurchasePrice = this.getPurchasePrice.value;
         const newSeliingPurchase = this.getSellingPrice.value;
         const newStock = this.getStock.value;
         const data = {
+            newImage,
             newName,
             newPurchasePrice,
             newSeliingPurchase,
@@ -17,15 +25,42 @@ class EditComponent extends Component {
         }
         this.props.dispatch({ type: 'UPDATE', id: this.props.post.id, data: data })
     }
+    _handleImageChange(e) {
+        e.preventDefault();
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+        this.setState({
+            file: file,
+            imagePreviewUrl: reader.result
+        });
+    }
+
+        reader.readAsDataURL(file)
+    }
     render() {
+        let {imagePreviewUrl} = this.state;
+        let $imagePreview = null;
+        if (imagePreviewUrl) {
+            $imagePreview = (<img src={imagePreviewUrl} />);
+        } else {
+            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        }
+        console.log('new',this.state.imagePreviewUrl)
         return (
             <div key={this.props.post.id} className="post">
                 <form className="form" onSubmit={this.handleEdit}>
-                    {/* <input required type="text" ref={(input) => this.getTitle = input}
-                    defaultValue={this.props.post.title} placeholder="Enter Post Title" /><br /><br />
-                    <textarea required rows="5" ref={(input) => this.getMessage = input}
-                    defaultValue={this.props.post.description} cols="28" placeholder="Enter Post" /><br /><br />
-                    <button>Update</button> */}
+                    <div className="previewComponent">
+                        <input className="fileInput" 
+                            type="file" 
+                            onChange={(e)=>this._handleImageChange(e)}
+                        />
+                        <div className="imgPreview">
+                            {$imagePreview}
+                        </div>
+                    </div>
                     <span> Nama Barang </span>
                     <input className="input mb-2" type="text" ref={(input) => this.getName = input} defaultValue={this.props.post.name} placeholder="Masukkan Nama Barang" />
                     <span> Harga Beli </span>
