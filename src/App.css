@@ -28,6 +28,36 @@
   color: #61dafb;
 }
 
+.imgPreview{
+  width: 10em;
+  height: 12em;
+  left: 30px;
+  top: 131px;
+  background: #FFFFFF;
+  border: 1px dashed #0E56C3;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.imgSize{
+  width: 7em !important;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.imageCenter{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

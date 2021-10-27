@@ -23,8 +23,8 @@ class AllPost extends Component {
     // }    
     render() {
         return (
-            <div className="mt-6">
-                <span className="is-size-1">To-do List</span>
+            <div className="mt-6 has-text-left">
+                <span className="is-size-1">List Barang</span>
                 {this.props.posts.map((post) => (
                     <div key={post.id}>
                         {post.editing ? <EditComponent post={post} key={post.id} /> : <Post post={post} key={post.id} />}
