@@ -26,7 +26,7 @@ class PostForm extends Component {
             id: Number(new Date()),
             image
         }
-        console.log('cek', data)
+        // console.log('cek', data)
         this.props.dispatch({
             type: 'ADD_POST',
             data,
@@ -35,8 +35,9 @@ class PostForm extends Component {
         this.getPurchasePrice.value = '';
         this.getSellingPrice.value = '';
         this.getStock.value = '';
-
-        console.log('name', data.name)
+        
+        console.log(data)
+        this.state.imagePreviewUrl = '';
     }
     
     _handleImageChange(e) {
@@ -69,11 +70,22 @@ class PostForm extends Component {
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
         }
-        console.log(this.state.imagePreviewUrl)
+        let array = []
+        {this.props.posts.forEach((post) => (
+            array.push(post.name)
+        ))}
+        // console.log('tes', array)
+        let unique = [...new Set(array)];
+
+        if (unique.length !== array.length){
+            alert ("Nama barang sudah ada. Masukkan nama lain")
+        }
+        // console.log(this.state.imagePreviewUrl)
         return (
             <div className="has-text-left">
                 <span className="is-size-1">Add Data</span>
-                <form className="form has-text-left" onSubmit={this.handleSubmit} >
+                {unique.length == array.length ? 
+                    <form className="form has-text-left" onSubmit={this.handleSubmit}>
                     <span> Masukkan Foto Barang </span>
                     <div className="previewComponent is-flex">
                         {/* <input className="fileInput" 
@@ -121,9 +133,65 @@ class PostForm extends Component {
                         <button class="button is-info is-fullwidth">Add Data</button>
                     </div>
                 </form>
+                : 
+                    <form className="form has-text-left">
+                        <span> Masukkan Foto Barang </span>
+                        <div className="previewComponent is-flex">
+                            {/* <input className="fileInput" 
+                                type="file" 
+                                onChange={(e)=>this._handleImageChange(e)} 
+                            /> */}
+                            <div className="file is-boxed mb-1">
+                                <label className="file-label">
+                                    <input className="file-input" type="file" name="resume" onChange={(e)=>this._handleImageChange(e)} required/>
+                                    <span className="file-cta">
+                                        <TrayArrowUpIcon size="2em"/>
+                                        <span className="file-label">
+                                            Masukkan gambar
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div className="imgPreview ml-4">
+                                {$imagePreview}
+                            </div>
+                        </div>
+                        <span className="mt-1"> Nama Barang </span>
+                        <input className="input mb-2" type="text" ref={(input) => this.getName = input} placeholder="Masukkan Nama Barang" required/>
+                        <span className="mt-1"> Harga Beli </span>
+                        <input className="input" type="tel" ref={(input) => this.getPurchasePrice = input} placeholder="Masukkan Harga Beli" required onKeyPress={(event) => {
+                            if (!/[0-9]/.test(event.key)) {
+                            event.preventDefault();
+                            }
+                        }}/>
+                        <span className="mt-1"> Harga Jual </span>
+                        <input className="input" type="tel" ref={(input) => this.getSellingPrice = input} placeholder="Masukkan Harga Jual" required onKeyPress={(event) => {
+                            if (!/[0-9]/.test(event.key)) {
+                            event.preventDefault();
+                            }
+                        }}/>
+                        <span className="mt-1"> Stock </span>
+                        <input className="input mb-1" type="tel" ref={(input) => this.getStock = input} placeholder="Masukkan Stock" required onKeyPress={(event) => {
+                            if (!/[0-9]/.test(event.key)) {
+                            event.preventDefault();
+                            }
+                        }}/>
+                        {/* <input required type="text" ref={(input) => this.getTitle = input} placeholder="Enter Post Title" /><br /><br /> */}
+                        {/* <textarea required rows="5" ref={(input) => this.getMessage = input} cols="28" placeholder="Enter Post" /><br /><br /> */}
+                        <div className="mt-3 is-flex is-justify-content-center">
+                            <button class="button is-info is-fullwidth">Add Data</button>
+                        </div>
+                    </form>
+                }
             </div>
         );
     }
 }
 
-export default connect()(PostForm);
+const mapStateToProps = (state) => {
+    return {
+        posts: state
+    }
+}
+
+export default connect(mapStateToProps)(PostForm);
