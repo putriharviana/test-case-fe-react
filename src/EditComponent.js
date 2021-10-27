@@ -66,8 +66,7 @@ class EditComponent extends Component {
             alert ("Nama barang sudah ada. Masukkan nama lain")
         }
         return (
-            <div key={this.props.post.id} className="post">
-                {unique.length == array.length ? 
+            <div key={this.props.post.id} className="post"> 
                     <form className="form" onSubmit={this.handleEdit}>
                         <div className="previewComponent is-flex mb-3">
                             <div className="file is-boxed mt-1">
@@ -109,49 +108,6 @@ class EditComponent extends Component {
                             <button class="button is-info is-fullwidth">Update Data</button>
                         </div>
                     </form>
-                :
-                    <form className="form">
-                        <div className="previewComponent is-flex mb-3">
-                            <div className="file is-boxed mt-1">
-                                <label className="file-label">
-                                    <input className="file-input" type="file" name="resume" onChange={(e)=>this._handleImageChange(e)} />
-                                    <span className="file-cta">
-                                        <TrayArrowUpIcon size="2em"/>
-                                        <span className="file-label">
-                                            Masukkan gambar
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div className="imgPreview ml-4">
-                                {$imagePreview}
-                            </div>
-                        </div>
-                        <span> Nama Barang </span>
-                        <input className="input mb-2" type="text" ref={(input) => this.getName = input} defaultValue={this.props.post.name} placeholder="Masukkan Nama Barang" required/>
-                        <span> Harga Beli </span>
-                        <input className="input" type="tel" ref={(input) => this.getPurchasePrice = input} defaultValue={this.props.post.purchasePrice} placeholder="Masukkan Harga Beli" required onKeyPress={(event) => {
-                            if (!/[0-9]/.test(event.key)) {
-                            event.preventDefault();
-                            }
-                        }}/>
-                        <span> Harga Jual </span>
-                        <input className="input" type="tel" ref={(input) => this.getSellingPrice = input} defaultValue={this.props.post.sellingPrice} placeholder="Masukkan Harga Jual" required onKeyPress={(event) => {
-                            if (!/[0-9]/.test(event.key)) {
-                            event.preventDefault();
-                            }
-                        }}/>
-                        <span> Stock </span>
-                        <input className="input" type="tel" ref={(input) => this.getStock = input} defaultValue={this.props.post.stock} placeholder="Masukkan Stock" required onKeyPress={(event) => {
-                            if (!/[0-9]/.test(event.key)) {
-                            event.preventDefault();
-                            }
-                        }}/>
-                        <div className="mt-3 mb-5 is-flex is-justify-content-center">
-                            <button class="button is-info is-fullwidth">Update Data</button>
-                        </div>
-                    </form>
-                }
             </div>
         );
     }
